@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<!-- design by mirza irtiza -->
+
+<html>
+    <title>Angular ToDo App</title>
+    <head>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+            <link rel="stylesheet" href="css/bootstrap.min.css">
+            <link rel="stylesheet" href="css/bootstrap.css">
+    </head>
+
+
+
+<body ng-app="myApp" ng-controller="todoCtrl">
+
+       
+    <div class="col-sm-12"  style="background: url(bg.jpg) center no-repeat fixed; background-size: cover;">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                    <div class="col-sm-8" style=" height:650px; background-color:rgba(255, 255, 255, 0.233)">
+                        <br>
+                           <center> <h2>My Todo List</h2> </center>
+<br>
+<center>
+                            <form ng-submit="todoAdd()">
+                                     <input class="form-control" type="text" ng-model="todoInput" size="50" placeholder="Add New" style="display: inline; width: 450px;">
+                                <input style="display: inline;" class="btn btn-info btn-sm" type="submit" value="Add New">
+                            </form>
+
+                            <br>
+
+                            <div ng-repeat="x in todoList" style="background: white; font-size: 1.5rem; width: 450px;">
+                                <input type="checkbox" ng-model="x.done"> <span ng-bind="x.todoText"></span>
+                            </div>
+                            <br>
+                            <p><button class="btn btn-danger" ng-click="remove()">Remove marked</button></p>
+
+</center>
+
+                    </div>
+                    <div class="col-sm-2"></div>
+
+                   
+<script>
+var app = angular.module('myApp', []); 
+app.controller('todoCtrl', function($scope) {
+    $scope.todoList = [{todoText:'Start', done:false}];
+
+    $scope.todoAdd = function() {
+        $scope.todoList.push({todoText:$scope.todoInput, done:false});
+        $scope.todoInput = "";
+    };
+
+    $scope.remove = function() {
+        var oldList = $scope.todoList;
+        $scope.todoList = [];
+        angular.forEach(oldList, function(x) {
+            if (!x.done) $scope.todoList.push(x);
+        });
+    };
+});
+</script>
+</div>
+</div>
+</div>
+
+<div>
+        <pre>
+                                                                                 <span>Copyright © ToDoApp 2017</span> 
+                                                                                  Design by <a href="https://irtiza-mirza.firebaseapp.com">Mirza Irtiza </a>
+        </pre>
+    </div>
+
+</body>
+</html>
